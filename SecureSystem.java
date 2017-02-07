@@ -1,6 +1,7 @@
 import java.lang.String;
 import java.lang.Integer;
 import java.util.*;
+import java.io.IOException;
 
 public class SecureSystem {
     private ArrayList<S_Subject> subjList;
@@ -55,6 +56,8 @@ public class SecureSystem {
 
     public static void main(String[] args) throws IOException {
 
+        SecureSystem sys = new SecureSystem();
+
         // Create two new subjects
         S_Subject hal = new S_Subject("hal", SecurityLevel.HIGH);
         S_Subject lyle = new S_Subject("lyle", SecurityLevel.LOW);
@@ -64,10 +67,10 @@ public class SecureSystem {
         // sys.createObject("lobj", "LOW");
         // sys.createObject("hobj", "HIGH");
 
-        subjList = new ArrayList<S_Subject>();
-        subjList.add(hal);
-        subjList.add(lyle);
+        sys.subjList = new ArrayList<>();
+        sys.subjList.add(hal);
+        sys.subjList.add(lyle);
 
-        parseArgs(args);
+        sys.parseArgs(args);
     }
 }

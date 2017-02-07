@@ -1,4 +1,5 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * Created by Alex Dai on 2/6/2017.
@@ -11,7 +12,7 @@ public class SecureSystemTest {
         assertEquals("write", sys.parseArgs(args).getInstructionType().getValue());
         assertEquals("hal", sys.parseArgs(args).getSubject());
         assertEquals("lyle", sys.parseArgs(args).getObject());
-        assert(10, sys.parseArgs(args).getValue());
+        assertEquals(10, sys.parseArgs(args).getValue());
     }
 
     public void test_parseArgs2(){
