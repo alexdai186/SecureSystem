@@ -3,6 +3,7 @@
  */
 import java.lang.String;
 import java.lang.Integer;
+import java.util.ArrayList;
 
 
 /* Instruction Object */
@@ -23,20 +24,12 @@ class S_Subject {
     public S_Subject(){}
 }
 
-/* S_Object Object */
-// Documentation suggests we do this in ReferenceMonitor Class
-class S_Object {
-    String name;
-    String security_level;
-    int temp = 0;
 
-    public S_Object(){}
-}
-
-public class SecureSystem {
+public class SecureSystem extends ReferenceMonitor{
 
     public static void main(String[] args){
 
+        /* Create Subjects */
         S_Subject hal = new S_Subject();
         hal.name = "hal";
         hal.security_level = "HIGH";
@@ -45,11 +38,18 @@ public class SecureSystem {
         lyle.name = "lyle";
         lyle.security_level = "LOW";
 
-        parseArgs(args, hal, lyle);
+        /* Create Objects */
+        ReferenceMonitor sys = new ReferenceMonitor();
+        sys.createObject("lobj", "LOW");
+        sys.createObject("hobj", "HIGH");
+
+
+        parseArgs(args, sys, hal, lyle);
 
     }
 
-    static public InstructionObject parseArgs(String[] args, S_Subject hal, S_Subject lyle){
+    static public InstructionObject parseArgs(String[] args, ReferenceMonitor sys,
+                                              S_Subject hal, S_Subject lyle){
 
         InstructionObject bad = new InstructionObject();
         bad.command = "bad";
@@ -72,7 +72,6 @@ public class SecureSystem {
 
         /* Sets Subject for Instruction */
         String arg1 = args[1].toLowerCase();
-        String arg2 = args[2].toLowerCase();
         if (arg1.equals("lyle")) {
             ins.subject = lyle;
         }
@@ -81,7 +80,15 @@ public class SecureSystem {
         }
 
         /* Sets Object for Instruction */
-        ins.object = args[2].toLowerCase();
+        String arg2 = args[2].toLowerCase();
+        ArrayList<S_Object> obj_list = sys.getObjects();
+        for (S_Object o : obj_list){
+            if (arg2.equals(o.name))
+                ins.object = o;
+                break;
+        }
+        if (ins.object == null)
+            return bad;
 
         /* If command is a "write" command there must be a 4th argument */
         if (args.length > 3 && ins.command.equals("write")){
@@ -94,7 +101,6 @@ public class SecureSystem {
         }
         else
             return bad;
-
         return ins;
     }
 }
