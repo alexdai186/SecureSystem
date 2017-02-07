@@ -19,7 +19,7 @@ class InstructionObject {
 class S_Subject {
     String name;
     String security_level;
-
+    int temp = 0;
     public S_Subject(){}
 }
 
@@ -28,6 +28,7 @@ class S_Subject {
 class S_Object {
     String name;
     String security_level;
+    int temp = 0;
 
     public S_Object(){}
 }
@@ -44,13 +45,12 @@ public class SecureSystem {
         lyle.name = "lyle";
         lyle.security_level = "LOW";
 
-
-
-        parseArgs(args);
+        parseArgs(args, hal, lyle);
 
     }
 
-    static public InstructionObject parseArgs(String[] args){
+    static public InstructionObject parseArgs(String[] args, S_Subject hal, S_Subject lyle){
+
         InstructionObject bad = new InstructionObject();
         bad.command = "bad";
         /* Returns BadInstruction if invalid number of arguments */
@@ -70,15 +70,21 @@ public class SecureSystem {
                 return bad;
         }
 
-        /* Sets User and Target for Instruction */
+        /* Sets Subject for Instruction */
         String arg1 = args[1].toLowerCase();
         String arg2 = args[2].toLowerCase();
-        if (arg1.equals("lyle") || arg1.equals("hal")){
-            ins.subject = arg1;
+        if (arg1.equals("lyle")) {
+            ins.subject = lyle;
         }
+        else if (arg1.equals("hal")) {
+            ins.subject = hal;
+        }
+
+        /* Sets Object for Instruction */
         ins.object = args[2].toLowerCase();
 
-        if (args.length > 3){
+        /* If command is a "write" command there must be a 4th argument */
+        if (args.length > 3 && ins.command.equals("write")){
             try{
                 ins.value = Integer.parseInt(args[3]);
             }
@@ -86,6 +92,8 @@ public class SecureSystem {
                 return bad;
             }
         }
+        else
+            return bad;
 
         return ins;
     }
