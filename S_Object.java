@@ -1,11 +1,11 @@
 class S_Object {
     private String name;
-    private String securityLevel;
+    private SecurityLevel securityLevel;
     private int temp = 0;
 
     public S_Object(String n, SecurityLevel level) {
         name = n;
-        securityLevel = s;
+        securityLevel = level;
     }
 
     public void setTemp(int t) {
