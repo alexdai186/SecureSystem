@@ -54,6 +54,15 @@ public class SecureSystem {
         return insObject;
     }
 
+    public void printState(ReferenceMonitor ref) {
+
+        ArrayList<S_Object> obj_list = new ArrayList<>();
+        obj_list = ref.getObjects();
+
+        if ()
+
+    }
+
     public static void main(String[] args) throws IOException {
 
         SecureSystem sys = new SecureSystem();
@@ -63,14 +72,16 @@ public class SecureSystem {
         S_Subject lyle = new S_Subject("lyle", SecurityLevel.LOW);
 
         // Create two new objects
-        // ReferenceMonitor sys = new ReferenceMonitor();
-        // sys.createObject("lobj", "LOW");
-        // sys.createObject("hobj", "HIGH");
+         ReferenceMonitor ref = new ReferenceMonitor();
+         ref.createObject("lobj", SecurityLevel.LOW);
+         ref.createObject("hobj", SecurityLevel.HIGH);
 
         sys.subjList = new ArrayList<>();
         sys.subjList.add(hal);
         sys.subjList.add(lyle);
 
-        sys.parseArgs(args);
+        InstructionObject ins = sys.parseArgs(args);
+
+        sys.printState(ref, ins);
     }
 }
