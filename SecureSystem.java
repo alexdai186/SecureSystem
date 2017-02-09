@@ -93,8 +93,8 @@ public class SecureSystem {
          ref.createObject("hobj", SecurityLevel.HIGH);
 
         sys.subjList = new ArrayList<>();
-        sys.subjList.add(hal);
         sys.subjList.add(lyle);
+        sys.subjList.add(hal);
 
         File file = new File(args[0]);
         Scanner scan = new Scanner(file);
