@@ -2,6 +2,8 @@ import java.lang.String;
 import java.lang.Integer;
 import java.util.*;
 import java.io.IOException;
+import java.util.Scanner;
+import java.io.File;
 
 public class SecureSystem {
     private ArrayList<S_Subject> subjList;
@@ -95,10 +97,14 @@ public class SecureSystem {
         sys.subjList = new ArrayList<>();
         sys.subjList.add(hal);
         sys.subjList.add(lyle);
-
-        InstructionObject ins = sys.parseArgs(args);
-        int type = ref.execute(ins, sys.subjList);
-
-        sys.printState(ref, ins, type);
+        File file = new File(args[0]);
+        Scanner scan = new Scanner(file);
+        while (scan.hasNext()) {
+            String line = scan.nextLine();
+            String[] arr = line.split("\\s+");
+            InstructionObject ins = sys.parseArgs(arr);
+            int type = ref.execute(ins, sys.subjList);
+            sys.printState(ref, ins, type);
+        }
     }
 }
