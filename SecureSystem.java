@@ -33,7 +33,6 @@ public class SecureSystem {
                     }
                     catch(Exception e) {
                         insObject.setInstructionType(InstructionType.BAD);
-                        return insObject;
                     }
                     insObject.setInstructionType(InstructionType.WRITE);
                 }
@@ -45,7 +44,7 @@ public class SecureSystem {
         }
 
         if (insObject.getInstructionType() == InstructionType.BAD)
-            return insObject;
+            return InstructionObject.BadInstruction;
 
         /* Sets Subject for Instruction */
         insObject.setSubject(args[1].toLowerCase());
