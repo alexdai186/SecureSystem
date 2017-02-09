@@ -35,7 +35,6 @@ public class SecureSystem {
                         insObject.setInstructionType(InstructionType.WRITE);
                     }
                     catch(Exception e) {
-                        System.out.println("Reached");
                         insObject.setInstructionType(InstructionType.BAD);
                     }
                 }
@@ -58,8 +57,7 @@ public class SecureSystem {
 
     public void printState(ReferenceMonitor ref, InstructionObject ins, int type) {
 
-        ArrayList<S_Object> obj_list = new ArrayList<>();
-        obj_list = ref.getObjects();
+        ArrayList<S_Object> obj_list = ref.getObjects();
 
         switch(type) {
             case -1:
@@ -74,10 +72,10 @@ public class SecureSystem {
         }
         System.out.println("The current state is: ");
         for (S_Object obj: obj_list) {
-            System.out.println(ins.getObjectName() + "has value: " + ins.getValue());
+            System.out.println(obj.getName() + "has value: " + ins.getValue());
         }
         for (S_Subject subj: subjList) {
-            System.out.println(ins.getSubjectName() + " has recently read: " + ins.getValue());
+            System.out.println(subj.getName() + " has recently read: " + ins.getValue());
         }
     }
 
