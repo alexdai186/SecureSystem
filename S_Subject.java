@@ -6,8 +6,21 @@ class S_Subject {
         name = n;
         securityLevel = level;
     }
+    // Getter
+    public String getName(){
+        return name;
+    }
 
+    public SecurityLevel getSecurityLevel() {
+        return securityLevel;
+    }
+
+    public int getTemp() {
+        return temp;
+    }    
+    // Setter
     public void setTemp(int t) {
         temp = t;
     }
+
 }

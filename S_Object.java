@@ -7,7 +7,19 @@ class S_Object {
         name = n;
         securityLevel = level;
     }
+    // Getter
+    public String getName(){
+        return name;
+    }
 
+    public SecurityLevel getSecurityLevel() {
+        return securityLevel;
+    }
+
+    public int getValue() {
+        return value;
+    }    
+    // Setter
     public void setValue(int v) {
         value = v;
     }
