@@ -1,8 +1,8 @@
-UTEID: ???; scw2243;
+UTEID: amd4482; scw2243;
 FIRSTNAME: Alexander; Songting
 LASTNAME: Dai; Wu;
-CSACCOUNT: ????; cindywu;
-EMAIL: ???; cindywu2018@utexas.edu;
+CSACCOUNT: alexdai; cindywu;
+EMAIL: alexdai@utexas.edu; cindywu2018@utexas.edu;
 
 [Program 1]
 [Description]
