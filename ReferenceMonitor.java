@@ -27,7 +27,7 @@ public class ReferenceMonitor {
     }
 
     public int execute(InstructionObject ins, ArrayList<S_Subject> subjList){
-        if (ins.InstructionType == InstructionType.BAD) {
+        if (ins.getInstructionType() == InstructionType.BAD) {
             System.out.println("Bad instruction");
             return -1;
         }
@@ -36,8 +36,8 @@ public class ReferenceMonitor {
                 for (S_Object obj: obj_list) {
                     if (ins.getObjectName().equals(obj.getName())) {
                         // READ operation
-                        if (ins.InstructionType == InstructionType.READ) {
-                            if (subj.getSecurityLevel.equals(obj.getSecurityLevel()) || 
+                        if (ins.getInstructionType() == InstructionType.READ) {
+                            if (subj.getSecurityLevel().equals(obj.getSecurityLevel()) ||
                                 (subj.getSecurityLevel() == SecurityLevel.HIGH && obj.getSecurityLevel() == SecurityLevel.LOW)) {
                                 return executeRead(subj, obj);
                             }
@@ -47,8 +47,8 @@ public class ReferenceMonitor {
                             }
                         }
                         // WRITE operation
-                        else if (ins.InstructionType == InstructionType.WRITE) {
-                            if (subj.getSecurityLevel.equals(obj.getSecurityLevel()) || 
+                        else if (ins.getInstructionType() == InstructionType.WRITE) {
+                            if (subj.getSecurityLevel().equals(obj.getSecurityLevel()) ||
                                 (subj.getSecurityLevel() == SecurityLevel.LOW && obj.getSecurityLevel() == SecurityLevel.HIGH)) {
                                 int value = obj.getValue();
                                 return executeWrite(obj, value);
@@ -81,6 +81,7 @@ public class ReferenceMonitor {
         public int write(S_Object obj, int value) {
             // changes the object's value
             obj.setValue(value);
+            return 0;
         }
     }
     

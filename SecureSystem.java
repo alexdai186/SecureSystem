@@ -7,7 +7,9 @@ public class SecureSystem {
     private ArrayList<S_Subject> subjList;
 
     public InstructionObject parseArgs(String[] args){
-        InstructionObject insObject = new InstructionObject();        
+        InstructionObject insObject = new InstructionObject();
+        final InstructionObject BadInstruction = new InstructionObject(InstructionType.BAD);
+
         // check what the command is
         String type = args[0].toLowerCase();
         switch(type) {
@@ -30,11 +32,12 @@ public class SecureSystem {
                 else {
                     try {
                         insObject.setValue(Integer.parseInt(args[3]));
+                        insObject.setInstructionType(InstructionType.WRITE);
                     }
                     catch(Exception e) {
+                        System.out.println("Reached");
                         insObject.setInstructionType(InstructionType.BAD);
                     }
-                    insObject.setInstructionType(InstructionType.WRITE);
                 }
                 break;
             default:
@@ -44,7 +47,7 @@ public class SecureSystem {
         }
 
         if (insObject.getInstructionType() == InstructionType.BAD)
-            return InstructionObject.BadInstruction;
+            return BadInstruction;
 
         /* Sets Subject for Instruction */
         insObject.setSubject(args[1].toLowerCase());
@@ -53,13 +56,29 @@ public class SecureSystem {
         return insObject;
     }
 
-    public void printState(ReferenceMonitor ref) {
+    public void printState(ReferenceMonitor ref, InstructionObject ins, int type) {
 
         ArrayList<S_Object> obj_list = new ArrayList<>();
         obj_list = ref.getObjects();
 
-        if ()
-
+        switch(type) {
+            case -1:
+                System.out.println("Bad Instruction");
+                break;
+            case 0:
+                System.out.println(ins.getSubjectName() + " writes value " + ins.getValue() + " to " + ins.getObjectName());
+                break;
+            default:
+                System.out.println(ins.getSubjectName() + " reads " + ins.getObjectName());
+                break;
+        }
+        System.out.println("The current state is: ");
+        for (S_Object obj: obj_list) {
+            System.out.println(ins.getObjectName() + "has value: " + ins.getValue());
+        }
+        for (S_Subject subj: subjList) {
+            System.out.println(ins.getSubjectName() + " has recently read: " + ins.getValue());
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -80,7 +99,8 @@ public class SecureSystem {
         sys.subjList.add(lyle);
 
         InstructionObject ins = sys.parseArgs(args);
+        int type = ref.execute(ins, sys.subjList);
 
-        sys.printState(ref, ins);
+        sys.printState(ref, ins, type);
     }
 }

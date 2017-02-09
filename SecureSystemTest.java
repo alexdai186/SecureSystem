@@ -20,7 +20,7 @@ public class SecureSystemTest {
     public void test_parseArgs2(){
         SecureSystem sys = new SecureSystem();
         String[] args = {"write", "hal", "lyle", "hello"};
-        assertEquals("bad", sys.parseArgs(args).getInstructionType().getValue());
+        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
     }
 
     @Test
@@ -36,21 +36,21 @@ public class SecureSystemTest {
     public void test_parseArgs4(){
         SecureSystem sys = new SecureSystem();
         String[] args = {"read"};
-        assertEquals("bad", sys.parseArgs(args).getInstructionType().getValue());
+        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
     }
 
     @Test
     public void test_parseArgs5(){
         SecureSystem sys = new SecureSystem();
         String[] args = {"read", "read", "read", "read"};
-        assertEquals("bad", sys.parseArgs(args).getInstructionType().getValue());
+        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
     }
 
     @Test
     public void test_parseArgs6(){
         SecureSystem sys = new SecureSystem();
         String[] args = {"hi", "hi", "hi"};
-        assertEquals("bad", sys.parseArgs(args).getInstructionType().getValue());
+        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
     }
 
 }

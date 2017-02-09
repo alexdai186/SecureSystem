@@ -8,9 +8,9 @@ public class InstructionObject {
     private String objectName;
     private int value;
 
-    final InstructionObject BadInstruction = new InstructionObject();
     // Constructors
     public InstructionObject() {}
+    public InstructionObject(InstructionType i) { insType = i; }
     // public InstructionObject(InstructionType i, String sName, String oName) {
     //     insType = i;
     //     subjectName = sName;
