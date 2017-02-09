@@ -42,9 +42,8 @@ public class ReferenceMonitor {
                             }
                             else {
                                 // Returns 0 so that state updates accordingly.
-                                System.out.println("SecurityLevel Error");
                                 object.invalid_read(subj);
-                                return -1;
+                                return -2;
                             }
                         }
                         // WRITE operation
@@ -55,7 +54,6 @@ public class ReferenceMonitor {
                                 return executeWrite(obj, value);
                             }
                             else {
-                                System.out.println("SecurityLevel Error");
                                 return -2;
                             }
                         }
