@@ -41,7 +41,9 @@ public class ReferenceMonitor {
                                 return executeRead(subj, obj);
                             }
                             else {
+                                // Returns 0 so that state updates accordingly.
                                 System.out.println("SecurityLevel Error");
+                                object.invalid_read(subj);
                                 return -1;
                             }
                         }
@@ -49,12 +51,12 @@ public class ReferenceMonitor {
                         else if (ins.getInstructionType() == InstructionType.WRITE) {
                             if (subj.getSecurityLevel().equals(obj.getSecurityLevel()) ||
                                 (subj.getSecurityLevel() == SecurityLevel.LOW && obj.getSecurityLevel() == SecurityLevel.HIGH)) {
-                                int value = obj.getValue();
+                                int value = ins.getValue();
                                 return executeWrite(obj, value);
                             }
                             else {
                                 System.out.println("SecurityLevel Error");
-                                return -1;
+                                return -2;
                             }
                         }
                     }
@@ -81,6 +83,10 @@ public class ReferenceMonitor {
             // changes the object's value
             obj.setValue(value);
             return 0;
+        }
+
+        public void invalid_read(S_Subject subj) {
+            subj.setTemp(0);
         }
     }
     

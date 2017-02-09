@@ -53,4 +53,11 @@ public class SecureSystemTest {
         assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
     }
 
+    @Test
+    public void test_parseArgs7(){
+        SecureSystem sys = new SecureSystem();
+        String[] args = {"Write", "hi", "bye", "40"};
+        assertEquals(40, sys.parseArgs(args).getValue());
+    }
+
 }

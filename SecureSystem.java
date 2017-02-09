@@ -60,24 +60,22 @@ public class SecureSystem {
     public void printState(ReferenceMonitor ref, InstructionObject ins, int type) {
 
         ArrayList<S_Object> obj_list = ref.getObjects();
-
-        switch(type) {
-            case -1:
-                System.out.println("Bad Instruction");
-                break;
-            case 0:
-                System.out.println(ins.getSubjectName() + " writes value " + ins.getValue() + " to " + ins.getObjectName());
-                break;
-            default:
-                System.out.println(ins.getSubjectName() + " reads " + ins.getObjectName());
-                break;
+        if (type == -1) {
+            System.out.println("Bad Instruction");
         }
+        if (ins.getInstructionType().equals(InstructionType.WRITE)) {
+            System.out.println(ins.getSubjectName() + " writes value " + ins.getValue() + " to " + ins.getObjectName());
+        }
+        if (ins.getInstructionType().equals(InstructionType.READ)) {
+            System.out.println(ins.getSubjectName() + " reads " + ins.getObjectName());
+        }
+
         System.out.println("The current state is: ");
         for (S_Object obj: obj_list) {
-            System.out.println(obj.getName() + " has value: " + ins.getValue());
+            System.out.println(obj.getName() + " has value: " + obj.getValue());
         }
         for (S_Subject subj: subjList) {
-            System.out.println(subj.getName() + " has recently read: " + ins.getValue());
+            System.out.println(subj.getName() + " has recently read: " + subj.getTemp());
         }
     }
 
@@ -86,8 +84,8 @@ public class SecureSystem {
         SecureSystem sys = new SecureSystem();
 
         // Create two new subjects
-        S_Subject hal = new S_Subject("hal", SecurityLevel.HIGH);
         S_Subject lyle = new S_Subject("lyle", SecurityLevel.LOW);
+        S_Subject hal = new S_Subject("hal", SecurityLevel.HIGH);
 
         // Create two new objects
          ReferenceMonitor ref = new ReferenceMonitor();
