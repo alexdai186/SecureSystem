@@ -59,11 +59,11 @@ public class ReferenceMonitor {
                         }
                     }
                 }
-                System.out.println("Object doesn't Exist");
+                //System.out.println("Object doesn't Exist");
                 return -1;
             }
         }
-        System.out.println("Subject doesn't Exist");
+        //System.out.println("Subject doesn't Exist");
         return -1;
     }
 

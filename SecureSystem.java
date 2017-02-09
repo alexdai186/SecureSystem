@@ -72,10 +72,10 @@ public class SecureSystem {
 
         System.out.println("The current state is: ");
         for (S_Object obj: obj_list) {
-            System.out.println(obj.getName() + " has value: " + obj.getValue());
+            System.out.println("\t" + obj.getName() + " has value: " + obj.getValue());
         }
         for (S_Subject subj: subjList) {
-            System.out.println(subj.getName() + " has recently read: " + subj.getTemp());
+            System.out.println("\t" + subj.getName() + " has recently read: " + subj.getTemp());
         }
     }
 
