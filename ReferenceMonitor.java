@@ -28,7 +28,6 @@ public class ReferenceMonitor {
 
     public int execute(InstructionObject ins, ArrayList<S_Subject> subjList){
         if (ins.getInstructionType() == InstructionType.BAD) {
-            System.out.println("Bad instruction");
             return -1;
         }
         for (S_Subject subj: subjList) {

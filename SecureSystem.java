@@ -74,7 +74,7 @@ public class SecureSystem {
         }
         System.out.println("The current state is: ");
         for (S_Object obj: obj_list) {
-            System.out.println(obj.getName() + "has value: " + ins.getValue());
+            System.out.println(obj.getName() + " has value: " + ins.getValue());
         }
         for (S_Subject subj: subjList) {
             System.out.println(subj.getName() + " has recently read: " + ins.getValue());
@@ -97,14 +97,18 @@ public class SecureSystem {
         sys.subjList = new ArrayList<>();
         sys.subjList.add(hal);
         sys.subjList.add(lyle);
+
         File file = new File(args[0]);
         Scanner scan = new Scanner(file);
+        System.out.println("Reading from file: " + file.toString() + "\n");
+
         while (scan.hasNext()) {
             String line = scan.nextLine();
             String[] arr = line.split("\\s+");
             InstructionObject ins = sys.parseArgs(arr);
             int type = ref.execute(ins, sys.subjList);
             sys.printState(ref, ins, type);
+            System.out.println();
         }
     }
 }
