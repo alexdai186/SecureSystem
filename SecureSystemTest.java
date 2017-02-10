@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * Created by Alex Dai on 2/7/2017.
+ * Unit tests for parseArgs()
  */
 public class SecureSystemTest {
 

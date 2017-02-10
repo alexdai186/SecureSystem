@@ -1,3 +1,6 @@
+/**
+ * Secure System Subject
+ */
 class S_Subject {
     private String name;
     private SecurityLevel securityLevel;

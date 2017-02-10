@@ -5,9 +5,14 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 
+/**
+ * Main file
+ */
 public class SecureSystem {
     private ArrayList<S_Subject> subjList;
 
+    // parseArgs altakes in a line of instruction and returns either an InstructionObject if the instruction is leg
+    // or a BadInstruction if otherwise
     public InstructionObject parseArgs(String[] args){
         InstructionObject insObject = new InstructionObject();
         final InstructionObject BadInstruction = new InstructionObject(InstructionType.BAD);
@@ -19,7 +24,6 @@ public class SecureSystem {
                 // checks if read command is illegal
                 if (args.length != 3) {
                     insObject.setInstructionType(InstructionType.BAD);
-                    // return insObject;
                 }
                 else {
                     insObject.setInstructionType(InstructionType.READ);
@@ -29,9 +33,9 @@ public class SecureSystem {
                 // checks if write command is illegal
                 if (args.length != 4) {
                     insObject.setInstructionType(InstructionType.BAD);
-                    // return insObject;
                 }
                 else {
+                    // also check if write value is an integer
                     try {
                         insObject.setValue(Integer.parseInt(args[3]));
                         insObject.setInstructionType(InstructionType.WRITE);
@@ -46,7 +50,7 @@ public class SecureSystem {
                 insObject.setInstructionType(InstructionType.BAD);
                 break;
         }
-
+        // returns a BadInstruction constant if instruction is illegal
         if (insObject.getInstructionType() == InstructionType.BAD)
             return BadInstruction;
 
@@ -88,23 +92,27 @@ public class SecureSystem {
         S_Subject hal = new S_Subject("hal", SecurityLevel.HIGH);
 
         // Create two new objects
-         ReferenceMonitor ref = new ReferenceMonitor();
-         ref.createObject("lobj", SecurityLevel.LOW);
-         ref.createObject("hobj", SecurityLevel.HIGH);
+        ReferenceMonitor ref = new ReferenceMonitor();
+        ref.createObject("lobj", SecurityLevel.LOW);
+        ref.createObject("hobj", SecurityLevel.HIGH);
 
+        // Add subjects to subject list
         sys.subjList = new ArrayList<>();
         sys.subjList.add(lyle);
         sys.subjList.add(hal);
 
+        // Read input
         File file = new File(args[0]);
         Scanner scan = new Scanner(file);
         System.out.println("Reading from file: " + file.toString() + "\n");
 
+        // Execute instructions. Reference Monitor deals with clearance level appropriately
         while (scan.hasNext()) {
             String line = scan.nextLine();
             String[] arr = line.split("\\s+");
             InstructionObject ins = sys.parseArgs(arr);
             int type = ref.execute(ins, sys.subjList);
+            // Prints the state after each instruction
             sys.printState(ref, ins, type);
             System.out.println();
         }

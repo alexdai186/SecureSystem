@@ -1,3 +1,6 @@
+/**
+ * Secure System Object
+ */
 class S_Object {
     private String name;
     private SecurityLevel securityLevel;
@@ -7,7 +10,7 @@ class S_Object {
         name = n;
         securityLevel = level;
     }
-    // Getter
+    // Getters
     public String getName(){
         return name;
     }
