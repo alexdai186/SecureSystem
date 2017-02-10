@@ -6,10 +6,10 @@ EMAIL: alexdai@utexas.edu; cindywu2018@utexas.edu;
 
 [Program 1]
 [Description]
-......
+This program stimulates a simple secure system that follows the Bell and LaPadula rules, in which subjects can perform read and write instructions on objects, as long as the instructions are syntactically correct and the subjects have the clearance to do so. The input to the program is a file with lines of instructions, and the output is a display of the system state, printing current values of all the objects and values that all the subjects had recently read after each instruction. The most important file is SecureSystem.java, which has the main method, parseArgs(), and printState(). The main method creates all objects and subjects in the system, reads in the instructions and executes them according to BLP rules, finally printing the system state after each instruction it reads. We check for instruction syntax in the method parseArgs() that takes in a line of instruction and passes to the Reference Monitor either an InstructionObject for a syntactically correct read/write or a BadInstruction for an illegal instruction. To implement security, the Reference Monitor uses the method execute() that calls either executeRead() or executeWrite() for legal instructions in which subjects have the appropriate security level to access objects. If the subject does not have clearance, no action is done. After the firewall (ReferenceMonitor) filters out authorized access, the actual read() and write() is performed by ObjectManager, which is local to ReferenceMonitor so all the read/write are legal. Finally, when the instruction is executed (or not executed), the system state is printed to reflect current values in all subjects and objects. In addition, it is important to note that we have a SecuritySystemTest.java, in which we wrote 7 unit tests to make sure that our parseArgs() works as expected.
 
 [Finish]
-Finished all requirements
+We finished all of the assignment and met all the requirements. Our test case output matches exactly with professor's output. Therefore, everything should work fine.
 
 [Test Cases]
 [Input of test 1]
@@ -253,74 +253,3 @@ The current state is:
 	hobj has value: 0
 	lyle has recently read: 0
 	hal has recently read: 0
-
-[Input of test 5]
-import static org.junit.Assert.*;
-import org.junit.Test;
-
-public class SecureSystemTest {
-
-    @Test
-    public void test_parseArgs1(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"write", "hal", "lyle", "10"};
-        assertEquals("write", sys.parseArgs(args).getInstructionType().getValue());
-        assertEquals("hal", sys.parseArgs(args).getSubjectName());
-        assertEquals("lyle", sys.parseArgs(args).getObjectName());
-        assertEquals(10, sys.parseArgs(args).getValue());
-    }
-
-    @Test
-    public void test_parseArgs2(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"write", "hal", "lyle", "hello"};
-        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
-    }
-
-    @Test
-    public void test_parseArgs3(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"read", "hal8", "lyle"};
-        assertEquals("read", sys.parseArgs(args).getInstructionType().getValue());
-        assertEquals("hal8", sys.parseArgs(args).getSubjectName());
-        assertEquals("lyle", sys.parseArgs(args).getObjectName());
-    }
-
-    @Test
-    public void test_parseArgs4(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"read"};
-        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
-    }
-
-    @Test
-    public void test_parseArgs5(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"read", "read", "read", "read"};
-        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
-    }
-
-    @Test
-    public void test_parseArgs6(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"hi", "hi", "hi"};
-        assertEquals(InstructionType.BAD, sys.parseArgs(args).getInstructionType());
-    }
-
-    @Test
-    public void test_parseArgs7(){
-        SecureSystem sys = new SecureSystem();
-        String[] args = {"Write", "hi", "bye", "40"};
-        assertEquals(40, sys.parseArgs(args).getValue());
-    }
-
-}
-
-[Output of test 5]
-Passed
-Passed
-Passed
-Passed
-Passed
-Passed
-Passed
