@@ -1,0 +1,7 @@
+write hal hal 10
+read hal hal
+read lobj lobj
+read lobj hal
+read hal lobj 10
+
+

@@ -1,0 +1,6 @@
+write hal hobj -1
+alex's social security number is
+5 3 4 2 5 3
+write         hal hobj 4
+write lyle lobj 344
+read            lyle                           lobj
