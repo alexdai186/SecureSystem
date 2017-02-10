@@ -121,6 +121,8 @@ read lobj hal
 read hal lobj 10
 
 [Output of test 2]
+Reading from file: testInstructions2
+
 Bad Instruction
 hal writes value 10 to hal
 The current state is:
@@ -169,6 +171,8 @@ write lyle lobj 344
 read            lyle                           lobj
 
 [Output of test 3]
+Reading from file: testInstructions3
+
 hal writes value -1 to hobj
 The current state is:
 	lobj has value: 0
@@ -219,6 +223,8 @@ write hal hobj     .
 read hal lobj                                  ke
 
 [Output of test 4]
+Reading from file: testInstructions4
+
 Bad Instruction
 The current state is:
 	lobj has value: 0
@@ -253,3 +259,4 @@ The current state is:
 	hobj has value: 0
 	lyle has recently read: 0
 	hal has recently read: 0
+	
