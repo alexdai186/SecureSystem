@@ -103,18 +103,23 @@ public class SecureSystem {
 
         // Read input
         File file = new File(args[0]);
-        Scanner scan = new Scanner(file);
-        System.out.println("Reading from file: " + file.toString() + "\n");
+        try {
+            Scanner scan = new Scanner(file);
+            System.out.println("Reading from file: " + file.toString() + "\n");
 
-        // Execute instructions. Reference Monitor deals with clearance level appropriately
-        while (scan.hasNext()) {
-            String line = scan.nextLine();
-            String[] arr = line.split("\\s+");
-            InstructionObject ins = sys.parseArgs(arr);
-            int type = ref.execute(ins, sys.subjList);
-            // Prints the state after each instruction
-            sys.printState(ref, ins, type);
-            System.out.println();
+            // Execute instructions. Reference Monitor deals with clearance level appropriately
+            while (scan.hasNext()) {
+                String line = scan.nextLine();
+                String[] arr = line.split("\\s+");
+                InstructionObject ins = sys.parseArgs(arr);
+                int type = ref.execute(ins, sys.subjList);
+                // Prints the state after each instruction
+                sys.printState(ref, ins, type);
+                System.out.println();
+            }
+        }
+        catch (Exception e) {
+            System.out.println(file.toString() + " does not exist.");
         }
     }
 }
