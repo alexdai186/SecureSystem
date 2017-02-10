@@ -1,5 +1,0 @@
-write hal hobj    4   .    5
-read h al hobj -3.4
-read hal lobj
-write hal hobj     .
-read hal lobj                                  ke
